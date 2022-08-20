@@ -1,0 +1,53 @@
+.entrada{
+    max-width: 80rem;
+    margin: 0 auto;
+}
+
+.contenido{
+    padding: 2rem;
+}
+
+.contenido h3{
+    font-weight: 400;
+    font-size: 2.8rem;
+    margin: 0;
+    list-style: 1.2;
+    padding-top: 2rem;
+}
+
+.fecha{
+    font-size: 1.6rem;
+    color: var(--primary);
+}
+
+.texto{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6;
+    overflow: hidden;
+    font-size: 2rem;
+}
+
+.texto__dos{
+   white-space: pre-wrap;
+   /* margin-top: -5rem; */
+}
+
+.enlace{
+    margin-top: 2rem;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--negro);
+    border: 2px solid var(--primary);
+    padding: 1rem 5rem;
+    transition-duration: 1s;
+}
+
+.enlace:hover{
+    background-color: var(--primary);
+    color: var(--blanco);
+}
