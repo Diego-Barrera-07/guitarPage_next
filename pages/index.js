@@ -1,12 +1,14 @@
 import Layout from "../components/Layout"
 import Listado from "../components/Listado"
 import Curso from "../components/Curso"
+import ListadoBlog from "../components/ListadoBlog"
 
 export default function Home({ guitarras, cursos, blogs }) {
   return (
     <div>
       <Layout
         title='Guitar NY | Inicio'
+        guitarra={guitarras[3]}
       >
         <main className="contenedor">
           <h1 className="heading">Nuestra colección</h1>
@@ -14,9 +16,14 @@ export default function Home({ guitarras, cursos, blogs }) {
             guitarras={guitarras}
           />
         </main>
-        <Curso 
+        <Curso
           cursos={cursos}
         />
+        <section className="contendor">
+          <ListadoBlog
+            result={blogs}
+          />
+        </section>
       </Layout>
 
     </div>
@@ -26,7 +33,7 @@ export default function Home({ guitarras, cursos, blogs }) {
 export async function getServerSideProps() {
   const urlGuitarras = `${process.env.API_URL}/guitarras`
   const urlCursos = `${process.env.API_URL}/cursos`
-  const urlBlogs = `${process.env.API_URL}/blogs`
+  const urlBlogs = `${process.env.API_URL}/blogs?_limit=3`
 
   const [resGuitarras, resCursos, resBlogs] = await Promise.all([
     fetch(urlGuitarras),

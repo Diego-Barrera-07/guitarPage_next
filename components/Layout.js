@@ -3,7 +3,7 @@ import Header from "../components/Header"
 import Footer from "../components/Footer"
 
 
-const Layout = ({ children, title }) => {
+const Layout = ({ children, title, guitarra }) => {
     return (
         <div>
             <Head>
@@ -14,7 +14,9 @@ const Layout = ({ children, title }) => {
                 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;500;700;900&display=swap" rel="stylesheet" />
             </Head>
 
-            <Header />
+            <Header
+                guitarra={guitarra}
+            />
 
             {children}
 
@@ -22,5 +24,10 @@ const Layout = ({ children, title }) => {
         </div>
     )
 }
+
+Layout.defaultProps = {
+    guitarra: null
+}
+
 
 export default Layout
