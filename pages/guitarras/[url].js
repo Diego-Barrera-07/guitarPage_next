@@ -1,9 +1,31 @@
+import { useState } from "react"
 import Image from "next/image"
 import styles from "../../styles/Guitarra.module.css"
 import Layout from "../../components/Layout"
-const Producto = ({ result }) => {
-    const { texto, imagen, titulo, precio } = result[0]
-    console.log(texto)
+const Producto = ({ result, agregarCarrito }) => {
+    const { texto, imagen, titulo, precio, id } = result[0]
+
+    const [cantidad, setCantidad] = useState(1)
+
+    const handelSubmit = (e) => {
+        e.preventDefault()
+        if(cantidad < 1){
+            alert('Cantidad no valida')
+            return;
+        }
+
+        //Agregar al carrito
+         const guitarraSelecciona = {
+            id,
+            imagen: imagen[0].url,
+            titulo, 
+            precio,
+            cantidad,
+         }  
+
+         agregarCarrito(guitarraSelecciona)
+
+    }
 
     return (
         <Layout
@@ -15,9 +37,12 @@ const Producto = ({ result }) => {
                     <h3>{titulo}</h3>
                     <p className={styles.texto}>{texto}</p>
                     <p className={styles.precio}>${precio}</p>
-                    <form className={styles.formulario}>
+                    <form className={styles.formulario} onSubmit={handelSubmit}>
                         <label>Cantidad:</label>
-                        <select>
+                        <select
+                            value={cantidad}
+                            onChange={e => setCantidad(e.target.value)}
+                        >
                             <option value="">-- Selecciona --</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -28,7 +53,7 @@ const Producto = ({ result }) => {
                         </select>
                         <input
                             type="submit"
-                            value="Agregar al carrito"
+                            value="Agregar al carrito"  
                         />
                     </form>
                 </div>
@@ -41,7 +66,7 @@ export async function getServerSideProps({ query: { url } }) {
     const urlProducto = `${process.env.API_URL}/guitarras?url=${url}`
     const response = await fetch(urlProducto)
     const result = await response.json()
-    console.log(result)
+    // console.log(result)
     return {
         props: {
             result
